@@ -6,6 +6,7 @@
         catch (error) { }
         try { return new ActiveXObject("Microsoft.XMLHTTP"); }
         catch (error) { }
+
         throw new Error("Could not create HTTP request object.");
     }
 
@@ -39,9 +40,9 @@
         return await promise;
     }
 
-    // function sleep(time) {
-    //     return new Promise((resolve) => setTimeout(resolve, time));
-    // }
+    function sleep(time) {
+        return new Promise((resolve) => setTimeout(resolve, time));
+    }
 
     /*Follow mình, không thích có thể remove =]] */
     // async function follow() {
@@ -55,8 +56,8 @@
     /*------------------------------------------*/
 
     async function autoLike(reaction = 1) {
-        var totalPage = 1;
         var url = /(.*)\/(page)?/gm.exec(window.location.href)[1];
+        var totalPage = 1;
         var pageNav = [...document.querySelectorAll(".pageNav-page")].pop()?.querySelector("a");
         if (pageNav != null) {
             totalPage = /\/page-(.*)/gm.exec(pageNav.href)[1];
@@ -74,9 +75,10 @@
                 var postId = /\/posts\/(\d+)\/react/gm.exec(item.href)[1];
                 console.log("Like post: " + postId);
                 var r = reaction || Math.floor(Math.random() * 6) + 1;
-                // httpPost("/posts/" + postId + "/react?reaction_id=" + r, "_xfRequestUri=" + pathName + "page-" + i + "&_xfWithData=1&_xfToken=" + token + "&_xfResponseType=json");
+                httpPost("/posts/" + postId + "/react?reaction_id=" + r, "_xfRequestUri=" + pathName + "page-" + i + "&_xfWithData=1&_xfToken=" + token + "&_xfResponseType=json");
             });
         }
+
         console.log("done");
     }
     autoLike(0);
