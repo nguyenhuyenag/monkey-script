@@ -348,7 +348,7 @@
 			if (i > 2) {
 				i += 0.75;
 			}
-			if (i > 4) {
+			if (i > 3) {
 				i++;
 				color = colors[0];
 				bgColor = bgColors[2];
