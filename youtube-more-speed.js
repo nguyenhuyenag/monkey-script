@@ -320,59 +320,56 @@
 // https://stackoverflow.com/questions/19238791/how-to-use-waitforkeyelements-to-display-information-after-select-images
 
 (function () {
-    "use strict";
- 
-    let funcDone = false;
-    const infoElemSelector = "div#top-row.style-scope.ytd-watch-metadata";
-    const bgColors = ["#605CB8", "#53C292", "#E64640"]; // https://www.schemecolor.com/colors-brighten-thoughts.php
-    const colors = ["#FFFFFF", "#000000"];
-    if (!funcDone) window.addEventListener("yt-navigate-finish", addSpeeds);
- 
-    if (document.body && !funcDone) {
-       waitForKeyElements(infoElemSelector, addSpeeds); // eslint-disable-line no-undef
-    }
- 
-    function addSpeeds() {
-       if (funcDone) return;
- 
-       let bgColor = bgColors[0];
-       let color = colors[0];
-       let moreSpeedsDiv = document.createElement("div");
-       moreSpeedsDiv.id = "more-speeds";
- 
-       for (let i = 0.25; i < 16; i += 0.25) {
-          if (i >= 1) {
-             bgColor = bgColors[1];
-             color = colors[1];
-          }
-          if (i > 1) {
-             i += 0.75;
-          }
-          if (i > 4) {
-             i++;
-             bgColor = bgColors[2];
-             color = colors[0];
-          }
- 
-          let btn = document.createElement("button");
-          btn.style.backgroundColor = bgColor;
-          btn.style.color = color;
-          btn.style.marginRight = "4px";
-          btn.style.border = "2px solid #D3D3D3";
-          btn.style.borderRadius = "16px";
-          btn.style.cursor = "pointer";
-          btn.textContent =
-             "×" + (i.toString().substr(0, 1) == "0" ? i.toString().substr(1) : i.toString());
-          btn.addEventListener("click", () => {
-             document.getElementsByTagName("video")[0].playbackRate = i;
-          });
-          moreSpeedsDiv.appendChild(btn);
-       }
- 
-       let infoElem = document.querySelector(infoElemSelector);
-       infoElem.parentElement.insertBefore(moreSpeedsDiv, infoElem);
- 
-       funcDone = true;
-    }
- })();
- 
+	"use strict";
+
+	let funcDone = false;
+	const infoElemSelector = "div#top-row.style-scope.ytd-watch-metadata";
+	const bgColors = ["#605CB8", "#53C292", "#E64640"]; // https://www.schemecolor.com/colors-brighten-thoughts.php
+	const colors = ["#FFFFFF", "#000000"];
+	if (!funcDone) window.addEventListener("yt-navigate-finish", addSpeeds);
+
+	if (document.body && !funcDone) {
+		waitForKeyElements(infoElemSelector, addSpeeds); // eslint-disable-line no-undef
+	}
+
+	function addSpeeds() {
+		if (funcDone) return;
+
+		let bgColor = bgColors[0];
+		let color = colors[0];
+		let moreSpeedsDiv = document.createElement("div");
+		moreSpeedsDiv.id = "more-speeds";
+
+		for (let i = 0.25; i < 10; i += 0.25) {
+			if (i >= 1) {
+				color = colors[1];
+				bgColor = bgColors[1];
+			}
+			if (i > 2) {
+				i += 0.75;
+			}
+			if (i > 4) {
+				i++;
+				color = colors[0];
+				bgColor = bgColors[2];
+			}
+			let btn = document.createElement("button");
+			btn.style.backgroundColor = bgColor;
+			btn.style.color = color;
+			btn.style.marginRight = "4px";
+			btn.style.border = "2px solid #D3D3D3";
+			btn.style.borderRadius = "16px";
+			btn.style.cursor = "pointer";
+			btn.textContent = "×" + (i.toString().substr(0, 1) == "0" ? i.toString().substr(1) : i.toString());
+			btn.addEventListener("click", () => {
+				document.getElementsByTagName("video")[0].playbackRate = i;
+			});
+			moreSpeedsDiv.appendChild(btn);
+		}
+
+		let infoElem = document.querySelector(infoElemSelector);
+		infoElem.parentElement.insertBefore(moreSpeedsDiv, infoElem);
+
+		funcDone = true;
+	}
+})();

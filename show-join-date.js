@@ -63,7 +63,7 @@ window.addEventListener('DOMContentLoaded', function () {
         els.forEach(el => {
             let jd = new Date(cachedIds[id]*1000)
             jd = jd.toLocaleDateString("vi-VN") + (jd < warningDate ? "" : " *");
-
+            jd = jd.replace("*", "");
             let jdEl = ('<h5 class="message-userTitle joindate" dir="auto" itemprop="joindate">{jd}</h5>{br}')
             // let jdEl = ('<h5 class="message-userTitle joindate" dir="auto" itemprop="joindate">Joined: {jd}</h5>{br}')
             .replace("{jd}", jd);
