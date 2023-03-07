@@ -64,8 +64,8 @@ window.addEventListener('DOMContentLoaded', function () {
             let jd = new Date(cachedIds[id]*1000)
             jd = jd.toLocaleDateString("vi-VN") + (jd < warningDate ? "" : " *");
 
-            // let jdEl = ('<h5 class="message-userTitle joindate" dir="auto" itemprop="joindate">Joined: {jd}</h5>{br}')
             let jdEl = ('<h5 class="message-userTitle joindate" dir="auto" itemprop="joindate">{jd}</h5>{br}')
+            // let jdEl = ('<h5 class="message-userTitle joindate" dir="auto" itemprop="joindate">Joined: {jd}</h5>{br}')
             .replace("{jd}", jd);
             let parent = el.parentElement.parentElement;
             let userBanners = parent.querySelectorAll(".userBanner");
