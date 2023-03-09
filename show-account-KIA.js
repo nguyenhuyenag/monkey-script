@@ -37,7 +37,7 @@ window.addEventListener('DOMContentLoaded', function () {
        if (isKIA) {
            let els = document.querySelectorAll(".message-userDetails a.username[data-user-id='" + id + "']");
            els.forEach(el => {
-               el.parentElement.parentElement.querySelector("[itemprop=jobTitle]").innerHTML = "<b>Nơi đảo xa</b>";
+               el.parentElement.parentElement.querySelector("[itemprop=jobTitle]").innerHTML = "<strong styke='red;'>Nơi đảo xa</strong>";
            });
        }
    }
