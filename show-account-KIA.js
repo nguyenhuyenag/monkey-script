@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Hiện nick bị KIA
 // @namespace    idmresettrial
-// @version      2022.01.17.01
+// @version      2023.03.10.01
 // @description  như tên
 // @author       You
 // @match        https://voz.vn/t/*
