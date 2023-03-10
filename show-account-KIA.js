@@ -37,7 +37,8 @@ window.addEventListener('DOMContentLoaded', function () {
         if (isKIA) {
             let els = document.querySelectorAll(".message-userDetails a.username[data-user-id='" + id + "']");
             els.forEach(el => {
-                el.parentElement.parentElement.querySelector("[itemprop=jobTitle]").innerHTML = "<strong style='color: #DC143C'>Nơi đảo xa</strong>";
+                // el.parentElement.parentElement.querySelector("[itemprop=jobTitle]").innerHTML = "<strong style='color: #DC143C'>Nơi đảo xa</strong>";
+                el.parentElement.parentElement.querySelector("[itemprop=jobTitle]").innerHTML = "<strong style='color: yellow;'>Nơi đảo xa</strong>";
             });
         }
     }
@@ -58,6 +59,4 @@ window.addEventListener('DOMContentLoaded', function () {
 
     let els = document.querySelectorAll(".message-userDetails a.username");
     els.forEach(el => observer.observe(el));
-
-
 });
