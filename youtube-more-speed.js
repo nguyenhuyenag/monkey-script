@@ -344,27 +344,22 @@
 
 		for (let i = 0.25; i < 10; i += 0.25) {
 			if (i >= 1) {
-				//color = textColors[1];
-				//bgColor = bgColors[1];
+
 			}
 			if (i > 2) {
 				i += 0.75;
-				//color = textColors[1];
-				//bgColor = bgColors[1];
 			}
 			if (i > 3) {
 				i++;
-				//color = textColors[1];
-				//bgColor = bgColors[1];
 			}
 			let btn = document.createElement("button");
 			btn.style.color = color;
 			btn.style.backgroundColor = bgColor;
+			btn.style.cursor = "pointer";
+			btn.textContent = "×" + i;
 			btn.style.marginRight = "1.5px";
 			btn.style.border = "2px solid #D3D3D3";
 			btn.style.borderRadius = "10px";
-			btn.style.cursor = "pointer";
-			btn.textContent = "×" + i; // (i.toString().substr(0, 1) == "0" ? i.toString().substr(1) : i.toString());
 
 			// Đặt kích thước cố định cho button
 			btn.style.width = "50px";
