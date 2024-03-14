@@ -370,15 +370,18 @@
 			btn.style.width = "50px"; // Thay đổi kích thước theo nhu cầu
 			btn.style.height = "20px"; // Thay đổi kích thước theo nhu cầu
 
+			if (i == 1) {
+				btn.style.backgroundColor = bgColors[1];
+				currentBtn = btn;
+			}
+
 			btn.addEventListener("click", () => {
 				if (currentBtn) {
-                    // Nếu đã có nút đang được nhấp, đặt lại màu của nút trước đó về màu gốc
                     currentBtn.style.backgroundColor = bgColors[0];
                 }
-                // Đặt màu của nút hiện tại thành đỏ
                 btn.style.backgroundColor = bgColors[1];
-                // Lưu trữ nút hiện tại vào biến currentBtn
                 currentBtn = btn;
+
                 // Thiết lập tốc độ phát lại video
                 document.getElementsByTagName("video")[0].playbackRate = i;
 			});
