@@ -326,6 +326,7 @@
 	const infoElemSelector = "div#top-row.style-scope.ytd-watch-metadata";
 	const bgColors = ["#605CB8", "#53C292", "#E64640"]; // https://www.schemecolor.com/colors-brighten-thoughts.php
 	const colors = ["#FFFFFF", "#000000"];
+
 	if (!funcDone) window.addEventListener("yt-navigate-finish", addSpeeds);
 
 	if (document.body && !funcDone) {
