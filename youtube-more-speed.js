@@ -323,10 +323,11 @@
 	"use strict";
 
 	let funcDone = false;
+	let currentBtn = null; // Biến để lưu trữ nút đang được nhấp
 	const infoElemSelector = "div#top-row.style-scope.ytd-watch-metadata";
+	// Text color
+	const textColors = ["#FFFFFF", "#000000"];
 	const bgColors = ["#605CB8", "#53C292", "#E64640"]; // https://www.schemecolor.com/colors-brighten-thoughts.php
-	const colors = ["#FFFFFF", "#000000"];
-
 	if (!funcDone) window.addEventListener("yt-navigate-finish", addSpeeds);
 
 	if (document.body && !funcDone) {
@@ -336,34 +337,50 @@
 	function addSpeeds() {
 		if (funcDone) return;
 
+		let color = textColors[0];
 		let bgColor = bgColors[0];
-		let color = colors[0];
 		let moreSpeedsDiv = document.createElement("div");
 		moreSpeedsDiv.id = "more-speeds";
 
 		for (let i = 0.25; i < 10; i += 0.25) {
-			// if (i >= 1) {
-			// 	color = colors[1];
-			// 	bgColor = bgColors[1];
-			// }
-			// if (i > 2) {
-			// 	i += 0.75;
-			// }
-			// if (i > 3) {
-			// 	i++;
-			// 	color = colors[0];
-			// 	bgColor = bgColors[2];
-			// }
+			if (i >= 1) {
+				//color = textColors[1];
+				//bgColor = bgColors[1];
+			}
+			if (i > 2) {
+				i += 0.75;
+				//color = textColors[1];
+				//bgColor = bgColors[1];
+			}
+			if (i > 3) {
+				i++;
+				//color = textColors[1];
+				//bgColor = bgColors[1];
+			}
 			let btn = document.createElement("button");
-			btn.style.backgroundColor = bgColor;
 			btn.style.color = color;
+			btn.style.backgroundColor = bgColor;
 			btn.style.marginRight = "4px";
 			btn.style.border = "2px solid #D3D3D3";
 			btn.style.borderRadius = "16px";
 			btn.style.cursor = "pointer";
-			btn.textContent = "×" + (i.toString().substr(0, 1) == "0" ? i.toString().substr(1) : i.toString());
+			btn.textContent = "×" + i; // (i.toString().substr(0, 1) == "0" ? i.toString().substr(1) : i.toString());
+
+			// Đặt kích thước cố định cho button
+			btn.style.width = "50px"; // Thay đổi kích thước theo nhu cầu
+			btn.style.height = "20px"; // Thay đổi kích thước theo nhu cầu
+
 			btn.addEventListener("click", () => {
-				document.getElementsByTagName("video")[0].playbackRate = i;
+				if (currentBtn) {
+                    // Nếu đã có nút đang được nhấp, đặt lại màu của nút trước đó về màu gốc
+                    currentBtn.style.backgroundColor = bgColors[0];
+                }
+                // Đặt màu của nút hiện tại thành đỏ
+                btn.style.backgroundColor = bgColors[1];
+                // Lưu trữ nút hiện tại vào biến currentBtn
+                currentBtn = btn;
+                // Thiết lập tốc độ phát lại video
+                document.getElementsByTagName("video")[0].playbackRate = i;
 			});
 			moreSpeedsDiv.appendChild(btn);
 		}
