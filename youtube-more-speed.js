@@ -360,15 +360,15 @@
 			let btn = document.createElement("button");
 			btn.style.color = color;
 			btn.style.backgroundColor = bgColor;
-			btn.style.marginRight = "4px";
+			btn.style.marginRight = "1.5px";
 			btn.style.border = "2px solid #D3D3D3";
-			btn.style.borderRadius = "16px";
+			btn.style.borderRadius = "10px";
 			btn.style.cursor = "pointer";
 			btn.textContent = "×" + i; // (i.toString().substr(0, 1) == "0" ? i.toString().substr(1) : i.toString());
 
 			// Đặt kích thước cố định cho button
-			btn.style.width = "50px"; // Thay đổi kích thước theo nhu cầu
-			btn.style.height = "20px"; // Thay đổi kích thước theo nhu cầu
+			btn.style.width = "50px";
+			btn.style.height = "25px";
 
 			if (i == 1) {
 				btn.style.backgroundColor = bgColors[1];
