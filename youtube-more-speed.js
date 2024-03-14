@@ -342,18 +342,18 @@
 		moreSpeedsDiv.id = "more-speeds";
 
 		for (let i = 0.25; i < 10; i += 0.25) {
-			if (i >= 1) {
-				color = colors[1];
-				bgColor = bgColors[1];
-			}
-			if (i > 2) {
-				i += 0.75;
-			}
-			if (i > 3) {
-				i++;
-				color = colors[0];
-				bgColor = bgColors[2];
-			}
+			// if (i >= 1) {
+			// 	color = colors[1];
+			// 	bgColor = bgColors[1];
+			// }
+			// if (i > 2) {
+			// 	i += 0.75;
+			// }
+			// if (i > 3) {
+			// 	i++;
+			// 	color = colors[0];
+			// 	bgColor = bgColors[2];
+			// }
 			let btn = document.createElement("button");
 			btn.style.backgroundColor = bgColor;
 			btn.style.color = color;
