@@ -316,6 +316,9 @@
 // @license MIT
 // ==/UserScript==
 
+// @name:vi YouTube More Tốc độ
+// @description:vi Xác định tốc độ đang phát
+
 // https://stackoverflow.com/questions/34077641/how-to-detect-page-navigation-on-youtube-and-modify-its-appearance-seamlessly
 // https://stackoverflow.com/questions/19238791/how-to-use-waitforkeyelements-to-display-information-after-select-images
 
@@ -327,7 +330,7 @@
     var activeBtn = null;
 
     const infoElemSelector = "div#top-row.style-scope.ytd-watch-metadata";
-    
+
     const textColors = ["#FFFFFF", "#000000"];
     const bgColors = ["#605CB8", "#53C292", "#E64640"];
 
