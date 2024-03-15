@@ -322,70 +322,66 @@
 (function () {
 	"use strict";
 
-	let funcDone = false;
-	let currentBtn = null; // Biến để lưu trữ nút đang được nhấp
-	const infoElemSelector = "div#top-row.style-scope.ytd-watch-metadata";
-	// Text color
-	const textColors = ["#FFFFFF", "#000000"];
-	const bgColors = ["#605CB8", "#53C292", "#E64640"]; // https://www.schemecolor.com/colors-brighten-thoughts.php
-	if (!funcDone) window.addEventListener("yt-navigate-finish", addSpeeds);
+    let funcDone = false;
 
-	if (document.body && !funcDone) {
-		waitForKeyElements(infoElemSelector, addSpeeds); // eslint-disable-line no-undef
-	}
+    var activeBtn = null;
 
-	function addSpeeds() {
-		if (funcDone) return;
+    const infoElemSelector = "div#top-row.style-scope.ytd-watch-metadata";
+    const textColors = ["#FFFFFF", "#000000"];
+    const bgColors = ["#605CB8", "#53C292", "#E64640"];
 
-		let color = textColors[0];
-		let bgColor = bgColors[0];
-		let moreSpeedsDiv = document.createElement("div");
-		moreSpeedsDiv.id = "more-speeds";
+    if (!funcDone) {
+        window.addEventListener("yt-navigate-finish", addSpeeds);
+    }
 
-		for (let i = 0.25; i < 10; i += 0.25) {
-			if (i >= 1) {
+    if (document.body && !funcDone) {
+        waitForKeyElements(infoElemSelector, addSpeeds);
+    }
 
-			}
-			if (i > 2) {
-				i += 0.75;
-			}
-			if (i > 3) {
-				i++;
-			}
-			let btn = document.createElement("button");
-			btn.style.color = color;
-			btn.style.backgroundColor = bgColor;
-			btn.style.cursor = "pointer";
-			btn.textContent = "×" + i;
-			btn.style.marginRight = "1.5px";
-			btn.style.border = "2px solid #D3D3D3";
-			btn.style.borderRadius = "10px";
+    function addSpeeds() {
+        if (funcDone) return;
 
-			// Đặt kích thước cố định cho button
-			btn.style.width = "50px";
-			btn.style.height = "25px";
+        let color = textColors[0];
+        let bgColor = bgColors[0];
+        let moreSpeedsDiv = document.createElement("div");
+        moreSpeedsDiv.id = "more-speeds";
 
-			if (i == 1) {
-				btn.style.backgroundColor = bgColors[1];
-				currentBtn = btn;
-			}
+        for (let i = 0.25; i < 8; i += 0.25) {
+            if (i >= 1) { }
+            if (i > 2) { i += 0.75; }
+            if (i > 3) { i++; }
 
-			btn.addEventListener("click", () => {
-				if (currentBtn) {
-                    currentBtn.style.backgroundColor = bgColors[0];
+            let btn = document.createElement("button");
+            btn.style.color = color;
+            btn.style.backgroundColor = bgColor;
+            btn.style.cursor = "pointer";
+            btn.textContent = "×" + i;
+            btn.style.marginRight = "1.5px";
+            btn.style.border = "2px solid #D3D3D3";
+            btn.style.borderRadius = "10px";
+            btn.style.width = "45px";
+            btn.style.height = "25px";
+
+            if (i == 1) {
+                btn.style.backgroundColor = bgColors[1];
+                activeBtn = btn;
+            }
+
+            btn.addEventListener("click", () => {
+                if (activeBtn) {
+                    activeBtn.style.backgroundColor = bgColors[0];
                 }
                 btn.style.backgroundColor = bgColors[1];
-                currentBtn = btn;
+                activeBtn = btn;
 
-                // Thiết lập tốc độ phát lại video
                 document.getElementsByTagName("video")[0].playbackRate = i;
-			});
-			moreSpeedsDiv.appendChild(btn);
-		}
+            });
+            moreSpeedsDiv.appendChild(btn);
+        }
 
-		let infoElem = document.querySelector(infoElemSelector);
-		infoElem.parentElement.insertBefore(moreSpeedsDiv, infoElem);
+        let infoElem = document.querySelector(infoElemSelector);
+        infoElem.parentElement.insertBefore(moreSpeedsDiv, infoElem);
 
-		funcDone = true;
-	}
+        funcDone = true;
+    }
 })();
