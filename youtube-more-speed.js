@@ -320,13 +320,14 @@
 // https://stackoverflow.com/questions/19238791/how-to-use-waitforkeyelements-to-display-information-after-select-images
 
 (function () {
-	"use strict";
+    "use strict";
 
     let funcDone = false;
 
     var activeBtn = null;
 
     const infoElemSelector = "div#top-row.style-scope.ytd-watch-metadata";
+    
     const textColors = ["#FFFFFF", "#000000"];
     const bgColors = ["#605CB8", "#53C292", "#E64640"];
 
@@ -381,6 +382,12 @@
 
         let infoElem = document.querySelector(infoElemSelector);
         infoElem.parentElement.insertBefore(moreSpeedsDiv, infoElem);
+
+        document.addEventListener('transitionend', function (e) {
+            if (e.target.id === 'progress') {
+                document.querySelector('#more-speeds > button:nth-child(4)').click();
+            }
+        });
 
         funcDone = true;
     }
