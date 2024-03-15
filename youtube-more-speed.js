@@ -306,6 +306,9 @@
 // @name:zu Ngesivinini-YouTube angeziwe
 // @description:zu Yengeza izinkinobho ngaphansi kwevidiyo ye-YouTube nge ngaphezulu ukudlala ngesivinini.
 
+// @name:vi YouTube More Tốc độ
+// @description:vi Xác định tốc độ đang phát
+
 // @namespace https://github.com/ssssssander
 // @icon https://www.youtube.com/s/desktop/3748dff5/img/favicon_48.png
 // @author ssssssander
@@ -316,9 +319,6 @@
 // @license MIT
 // ==/UserScript==
 
-// @name:vi YouTube More Tốc độ
-// @description:vi Xác định tốc độ đang phát
-
 // https://stackoverflow.com/questions/34077641/how-to-detect-page-navigation-on-youtube-and-modify-its-appearance-seamlessly
 // https://stackoverflow.com/questions/19238791/how-to-use-waitforkeyelements-to-display-information-after-select-images
 
@@ -328,9 +328,9 @@
     let funcDone = false;
 
     var activeBtn = null;
+    var defaultBnt = null;
 
     const infoElemSelector = "div#top-row.style-scope.ytd-watch-metadata";
-
     const textColors = ["#FFFFFF", "#000000"];
     const bgColors = ["#605CB8", "#53C292", "#E64640"];
 
@@ -339,8 +339,12 @@
     }
 
     if (document.body && !funcDone) {
-        waitForKeyElements(infoElemSelector, addSpeeds);
+        // Chờ cho các phần tử được chọn bởi infoElemSelector xuất hiện
+        waitForKeyElements(infoElemSelector, () => {
+            addSpeeds();
+        });
     }
+
 
     function addSpeeds() {
         if (funcDone) return;
@@ -359,16 +363,17 @@
             btn.style.color = color;
             btn.style.backgroundColor = bgColor;
             btn.style.cursor = "pointer";
-            btn.textContent = "×" + i;
             btn.style.marginRight = "1.5px";
             btn.style.border = "2px solid #D3D3D3";
             btn.style.borderRadius = "10px";
             btn.style.width = "45px";
             btn.style.height = "25px";
+            btn.textContent = "×" + i;
 
             if (i == 1) {
                 btn.style.backgroundColor = bgColors[1];
                 activeBtn = btn;
+                defaultBnt = btn;
             }
 
             btn.addEventListener("click", () => {
@@ -386,10 +391,16 @@
         let infoElem = document.querySelector(infoElemSelector);
         infoElem.parentElement.insertBefore(moreSpeedsDiv, infoElem);
 
+        // Open new video?
         document.addEventListener('transitionend', function (e) {
             if (e.target.id === 'progress') {
-                document.querySelector('#more-speeds > button:nth-child(4)').click();
+                if (defaultBnt) { defaultBnt.click(); }
             }
+        });
+
+        // Next & previous video
+        window.addEventListener('popstate', function (event) {
+            if (defaultBnt) { defaultBnt.click(); }
         });
 
         funcDone = true;
