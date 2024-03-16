@@ -354,7 +354,7 @@
         let moreSpeedsDiv = document.createElement("div");
         moreSpeedsDiv.id = "more-speeds";
 
-        for (let i = 0.25; i < 8; i += 0.25) {
+        for (let i = 0.25; i < 7; i += 0.25) {
             if (i >= 1) { }
             if (i > 2) { i += 0.75; }
             if (i > 3) { i++; }
@@ -393,9 +393,9 @@
 
         // Open new video?
         document.addEventListener('transitionend', function (e) {
-            if (e.target.id === 'progress') {
-                if (defaultBnt) { defaultBnt.click(); }
-            }
+            // if (e.target.id === 'progress') {
+            if (defaultBnt) { defaultBnt.click(); }
+            // }
         });
 
         // Next & previous video
