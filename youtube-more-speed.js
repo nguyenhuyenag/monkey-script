@@ -390,9 +390,9 @@
 
         // Open new video?
         document.addEventListener('transitionend', function (e) {
-            // if (e.target.id === 'progress') {
-            if (defaultBnt) { defaultBnt.click(); }
-            // }
+            if (e.target.id === 'progress') { // important
+                if (defaultBnt) { defaultBnt.click(); }
+            }
         });
 
         // Next & previous video
