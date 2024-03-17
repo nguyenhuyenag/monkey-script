@@ -340,11 +340,8 @@
 
     if (document.body && !funcDone) {
         // Chờ cho các phần tử được chọn bởi infoElemSelector xuất hiện
-        waitForKeyElements(infoElemSelector, () => {
-            addSpeeds();
-        });
+        waitForKeyElements(infoElemSelector, addSpeeds);
     }
-
 
     function addSpeeds() {
         if (funcDone) return;
