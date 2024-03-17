@@ -388,15 +388,15 @@
         let infoElem = document.querySelector(infoElemSelector);
         infoElem.parentElement.insertBefore(moreSpeedsDiv, infoElem);
 
-        // Open new video?
-        document.addEventListener('transitionend', function (e) {
+        // When a CSS transition has completed
+        document.addEventListener('transitionend', (e) => {
             if (e.target.id === 'progress') { // important
                 if (defaultBnt) { defaultBnt.click(); }
             }
         });
 
-        // Next & previous video
-        window.addEventListener('popstate', function (event) {
+        // When the active history entry changes
+        window.addEventListener('popstate', () => {
             if (defaultBnt) { defaultBnt.click(); }
         });
 
