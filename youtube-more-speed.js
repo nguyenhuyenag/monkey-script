@@ -365,7 +365,7 @@
             btn.style.borderRadius = "10px";
             btn.style.width = "45px";
             btn.style.height = "25px";
-            btn.textContent = "×" + i;
+            btn.textContent = `×${i}`;
 
             if (i == 1) {
                 btn.style.backgroundColor = bgColors[1];
