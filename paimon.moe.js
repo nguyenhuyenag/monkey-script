@@ -5,7 +5,7 @@
 
 // @namespace https://github.com/nguyenhuyenag
 // @icon https://paimon.moe/favicon.png
-// @author Fzen
+// @author nguyenhuyenag
 // @homepage https://github.com/nguyenhuyenag/monkey-script
 // @supportURL https://github.com/nguyenhuyenag/monkey-script/issues
 // @match *://*.paimon.moe/*
