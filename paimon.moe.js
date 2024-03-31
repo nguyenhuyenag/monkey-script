@@ -16,13 +16,13 @@
     "use strict";
 
     function checkboxHandler() {
-        const firstCheckbox = document.querySelector('input[type="checkbox"]:first-of-type');
-        if (!firstCheckbox) {
+        const showNotAchieved = document.querySelector('input[type="checkbox"]:first-of-type');
+        if (!showNotAchieved) {
             console.log("Checkbox element not found!");
             return;
         }
-        if (!firstCheckbox.checked) {
-            firstCheckbox.click();
+        if (!showNotAchieved.checked) {
+            showNotAchieved.click();
         } else {
             console.log("Checkbox already checked!");
         }
