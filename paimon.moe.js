@@ -15,17 +15,21 @@
 (function () {
     "use strict";
 
-    // Select the first checkbox input element on the page
-    const firstCheckbox = document.querySelector('input[type="checkbox"]:first-of-type');
-
-    if (firstCheckbox) {
-        const parentElement = firstCheckbox.parentNode;
-        if (parentElement) {
-            parentElement.click();
-        } else {
-            console.log("Parent element not found.");
+    function checkboxHandler() {
+        const firstCheckbox = document.querySelector('input[type="checkbox"]:first-of-type');
+        if (!firstCheckbox) {
+            console.log("Checkbox element not found!");
+            return;
         }
-    } else {
-        console.log("Checkbox element not found.");
+        if (!firstCheckbox.checked) {
+            firstCheckbox.click();
+        } else {
+            console.log("Checkbox already checked!");
+        }
     }
+    
+    checkboxHandler();
+    
+    document.addEventListener('transitionend', checkboxHandler);
+    window.addEventListener('popstate', checkboxHandler);
 })();
