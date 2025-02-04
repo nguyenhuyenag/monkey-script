@@ -5,6 +5,7 @@
 // @description  như tên
 // @author       You
 // @match        https://voz.vn/t/*
+// @icon         https://www.google.com/s2/favicons?sz=64&domain=voz.vn
 // @grant        GM_setValue
 // @grant        GM_getValue
 // @run-at       document-start
@@ -41,9 +42,10 @@ window.addEventListener('DOMContentLoaded', function () {
         let httpRequest = new XMLHttpRequest();
         httpRequest.onreadystatechange = function() {
             if (httpRequest.readyState === XMLHttpRequest.DONE && httpRequest.status === 200) {
-                let joindate = JSON.parse(httpRequest.responseText).html.content.match(/data-time=\"(.*?)\"/);
+                let joindate = JSON.parse(httpRequest.responseText).html.content.match(/data-timestamp=\"(.*?)\"/);
                 if (joindate && !isNaN(Number(joindate[1]))) {
-                    cachedIds[id] = Number(joindate[1]);
+                    // console.log("joindate", joindate);
+                    // cachedIds[id] = Number(joindate[1]);
                     showJd(id);
                 }
             }
@@ -61,17 +63,23 @@ window.addEventListener('DOMContentLoaded', function () {
 
         let els = document.querySelectorAll(".message-userDetails a.username[data-user-id='" + id + "']");
         els.forEach(el => {
-            let jd = new Date(cachedIds[id]*1000)
+            let jd = new Date(cachedIds[id] * 1000);
             jd = jd.toLocaleDateString("vi-VN") + (jd < warningDate ? "" : " *");
             jd = jd.replace("*", "");
-            let jdEl = ('<h5 class="message-userTitle joindate" dir="auto" itemprop="joindate">{jd}</h5>{br}')
+            // console.log("jd", jd);
+            let jdEl = ('<h5 class="message-userTitle joindate" dir="auto" itemprop="joindate">{jd}</h5>{br}').replace("{jd}", jd);
             // let jdEl = ('<h5 class="message-userTitle joindate" dir="auto" itemprop="joindate">Joined: {jd}</h5>{br}')
-            .replace("{jd}", jd);
+            // console.log("jdEl", jdEl);
             let parent = el.parentElement.parentElement;
+            // console.log("parent", parent);
             let userBanners = parent.querySelectorAll(".userBanner");
+            // console.log("userBanners", userBanners);
 
             jdEl = jdEl.replace("{br}", (userBanners.length >= 2)? "<br/>" : "");
-            parent.querySelector("[itemProp=jobTitle]").insertAdjacentHTML('afterend', jdEl);
+            let jobTitle = parent.querySelector("[itemProp=jobTitle]");
+            if (jobTitle) {
+                jobTitle.insertAdjacentHTML('afterend', jdEl);
+            }
         });
 
         done.push(id);
