@@ -44,8 +44,7 @@ window.addEventListener('DOMContentLoaded', function () {
             if (httpRequest.readyState === XMLHttpRequest.DONE && httpRequest.status === 200) {
                 let joindate = JSON.parse(httpRequest.responseText).html.content.match(/data-timestamp=\"(.*?)\"/);
                 if (joindate && !isNaN(Number(joindate[1]))) {
-                    // console.log("joindate", joindate);
-                    // cachedIds[id] = Number(joindate[1]);
+                    cachedIds[id] = Number(joindate[1]);
                     showJd(id);
                 }
             }
@@ -66,15 +65,10 @@ window.addEventListener('DOMContentLoaded', function () {
             let jd = new Date(cachedIds[id] * 1000);
             jd = jd.toLocaleDateString("vi-VN") + (jd < warningDate ? "" : " *");
             jd = jd.replace("*", "");
-            // console.log("jd", jd);
             let jdEl = ('<h5 class="message-userTitle joindate" dir="auto" itemprop="joindate">{jd}</h5>{br}').replace("{jd}", jd);
             // let jdEl = ('<h5 class="message-userTitle joindate" dir="auto" itemprop="joindate">Joined: {jd}</h5>{br}')
-            // console.log("jdEl", jdEl);
             let parent = el.parentElement.parentElement;
-            // console.log("parent", parent);
             let userBanners = parent.querySelectorAll(".userBanner");
-            // console.log("userBanners", userBanners);
-
             jdEl = jdEl.replace("{br}", (userBanners.length >= 2)? "<br/>" : "");
             let jobTitle = parent.querySelector("[itemProp=jobTitle]");
             if (jobTitle) {
