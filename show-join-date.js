@@ -4,7 +4,7 @@
 // @version      2025-03-03
 // @description  try to take over the world!
 // @author       You
-// @match        https://voz.vn/t/script-tampermonkey.379635/page-55
+// @match        https://voz.vn/t/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=voz.vn
 // @grant        none
 // @run-at       document-start

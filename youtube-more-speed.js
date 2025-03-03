@@ -1,19 +1,14 @@
 // ==UserScript==
-// @version      1.4.2
-// @name         YouTube More Speeds
-// @description  Adds buttons under a YouTube video with more playback speeds.
-
-// @name:zu Ngesivinini-YouTube angeziwe
-// @description:zu Yengeza izinkinobho ngaphansi kwevidiyo ye-YouTube nge ngaphezulu ukudlala ngesivinini.
-
-// @namespace https://github.com/ssssssander
-// @icon https://www.youtube.com/s/desktop/3748dff5/img/favicon_48.png
-// @author ssssssander
-// @homepage https://github.com/ssssssander/youtube-more-speeds
-// @supportURL https://github.com/ssssssander/youtube-more-speeds/issues
-// @match *://*.youtube.com/*
-// @require https://greasyfork.org/scripts/446257-waitforkeyelements-utility-function/code/waitForKeyElements%20utility%20function.js?version=1059316
-// @license MIT
+// @name        Youtube More Speeds
+// @description Youtube More Speeds
+// @namespace   Violentmonkey Scripts
+// @match       https://www.youtube.com/*
+// @grant       GM_addStyle
+// @version     0.0.1
+// @author      You
+// @license     MIT
+// @run-at      document-idle
+// @icon        https://www.youtube.com/s/desktop/3748dff5/img/favicon_48.png
 // ==/UserScript==
 
 (function () {
