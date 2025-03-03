@@ -1,15 +1,12 @@
 // ==UserScript==
-// @name         Hiện Join date
-// @namespace    idmresettrial
-// @version      2022.01.17.01
-// @description  như tên
+// @name         Show join date
+// @namespace    http://tampermonkey.net/
+// @version      2025-03-03
+// @description  try to take over the world!
 // @author       You
-// @match        https://voz.vn/t/*
+// @match        https://voz.vn/t/script-tampermonkey.379635/page-55
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=voz.vn
-// @grant        GM_setValue
-// @grant        GM_getValue
-// @run-at       document-start
-// @antifeature  tracking
+// @grant        none
 // ==/UserScript==
 
 window.addEventListener('DOMContentLoaded', function () {

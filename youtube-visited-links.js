@@ -8,8 +8,8 @@
 // @author        -
 // @license       MIT
 // @run-at        document-idle
+// @icon https://www.youtube.com/s/desktop/3748dff5/img/favicon_48.png
 // ==/UserScript==
-
 
 (function main(){
   const css=`h3>a[id*="video-title"]:visited>yt-formatted-string {
