@@ -91,4 +91,4 @@ window.addEventListener('DOMContentLoaded', async () => {
             console.error(user);
         }
     }
-})
+});

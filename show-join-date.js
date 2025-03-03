@@ -101,6 +101,4 @@ window.addEventListener('DOMContentLoaded', function () {
     style.innerHTML = '@media (max-width: 751px) { .message-userTitle.joindate:before {content: ". "} }' +
                       '@media (min-width: 752px) { .message-userTitle.joindate + br {display: none;}  }';
     document.head.appendChild(style);
-
-
 });
