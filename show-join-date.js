@@ -7,6 +7,7 @@
 // @match        https://voz.vn/t/script-tampermonkey.379635/page-55
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=voz.vn
 // @grant        none
+// @run-at       document-start
 // ==/UserScript==
 
 window.addEventListener('DOMContentLoaded', function () {
@@ -95,7 +96,7 @@ window.addEventListener('DOMContentLoaded', function () {
     els.forEach(el => observer.observe(el));
 
     let style = document.createElement('style');
-    style.innerHTML = '@media (max-width: 751px) { .message-userTitle.joindate:before {content: ". "} }' +
-                      '@media (min-width: 752px) { .message-userTitle.joindate + br {display: none;}  }';
+    style.innerHTML = '@media (max-width: 751px) { .message-userTitle.joindate:before {content: ". "} }' 
+                      + '@media (min-width: 752px) { .message-userTitle.joindate + br {display: none;}  }';
     document.head.appendChild(style);
 });

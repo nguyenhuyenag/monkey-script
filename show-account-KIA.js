@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         Hiện nick bị KIA
-// @namespace    idmresettrial
+// @namespace    http://tampermonkey.net/
 // @version      2023.03.10.03
-// @description  như tên
-// @author       You
+// @description  Hiện nick bị KIA
+// @author       idmresettrial
 // @match        https://voz.vn/t/*
 // @grant        none
 // @run-at       document-start
@@ -55,8 +55,8 @@ window.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
-    let observer = new IntersectionObserver(inoHandler);
 
+    let observer = new IntersectionObserver(inoHandler);
     let els = document.querySelectorAll(".message-userDetails a.username");
     els.forEach(el => observer.observe(el));
 });
