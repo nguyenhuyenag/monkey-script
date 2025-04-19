@@ -33,13 +33,32 @@
 		return false;
 	}
 
+	function hideTargetDivs() {
+		// Tìm tất cả các <p> có class "mr-1" và text = "1"
+		const targetParagraphs = document.querySelectorAll('p.mr-1.svelte-lpdzps');
+
+		targetParagraphs.forEach(p => {
+			if (p.textContent.trim() === '1') {
+				// Tìm div cha lớn nhất (cấp cao nhất) chứa <p> này
+				const divToHide = p.closest('div.bg-item.rounded-xl');
+				if (divToHide) {
+					divToHide.style.display = 'none'; // Ẩn div
+					console.log('✅ Đã ẩn div:', divToHide);
+				}
+			}
+		});
+	}
+
 	// Thử ngay khi DOM sẵn sàng
 	if (document.readyState === 'complete') {
 		clickCheckbox();
+		hideTargetDivs();
 	} else {
 		document.addEventListener('DOMContentLoaded', clickCheckbox);
+		document.addEventListener('DOMContentLoaded', hideTargetDivs);
 	}
-	// Nếu trang tải AJAX, thử lại sau 1 giây
+	// Nếu trang tải AJAX, thử lại 
 	setTimeout(clickCheckbox, 1000);
+	setTimeout(hideTargetDivs, 1000);
 })();
 
