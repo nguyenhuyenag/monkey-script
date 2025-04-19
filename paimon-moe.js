@@ -47,16 +47,43 @@
 		});
 	}
 
+	// // Mảng chứa các nội dung cần ẩn
+	// const targetContents = [
+	// 	"Deianeira Của Snezhevna"
+	// ];
+
+	// function hideMatchingDivs() {
+	// 	// Tìm tất cả các thẻ p có class font-semibold
+	// 	const titleElements = document.querySelectorAll('p.font-semibold.svelte-lpdzps');
+
+	// 	titleElements.forEach(p => {
+	// 		// Lấy nội dung text (bỏ qua các thẻ con bên trong)
+	// 		const titleText = p.childNodes[0]?.textContent?.trim();
+
+	// 		// Kiểm tra nếu nội dung nằm trong mảng targetTitles
+	// 		if (titleText && targetTitles.includes(titleText)) {
+	// 			// Tìm thẻ div cha cần ẩn (có class bg-item rounded-xl)
+	// 			const divToHide = p.closest('div.bg-item.rounded-xl');
+	// 			if (divToHide) {
+	// 				divToHide.style.display = 'none';
+	// 				console.log('✅ Đã ẩn div chứa:', titleText);
+	// 			}
+	// 		}
+	// 	});
+	// }
+
 	// Thử ngay khi DOM sẵn sàng
 	if (document.readyState === 'complete') {
 		clickCheckbox();
 		hideTargetDivs();
+		// hideMatchingDivs();
 	} else {
 		document.addEventListener('DOMContentLoaded', clickCheckbox);
 		document.addEventListener('DOMContentLoaded', hideTargetDivs);
+		// document.addEventListener('DOMContentLoaded', hideMatchingDivs);
 	}
 	// Nếu trang tải AJAX, thử lại 
-	setTimeout(clickCheckbox, 1000);
-	setTimeout(hideTargetDivs, 1000);
+	setTimeout(clickCheckbox, 3000);
+	setTimeout(hideTargetDivs, 3000);
+	// setTimeout(hideMatchingDivs, 3000);
 })();
-
