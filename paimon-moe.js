@@ -15,8 +15,8 @@
 (function () {
 	"use strict";
 
+	// Click check box: Hiện thị thành tựu chưa có trước
 	function clickCheckbox() {
-		// Tìm tất cả các label có class "flex items-center"
 		const labels = document.querySelectorAll('label.flex.items-center');
 		for (const label of labels) {
 			// Kiểm tra textContent (bao gồm cả khoảng trắng và đúng chính tả)
@@ -33,13 +33,11 @@
 		return false;
 	}
 
+	// Ẩn những thành tựu bị bỏ
 	function hideTargetDivs() {
-		// Tìm tất cả các <p> có class "mr-1" và text = "1"
 		const targetParagraphs = document.querySelectorAll('p.mr-1.svelte-lpdzps');
-
 		targetParagraphs.forEach(p => {
 			if (p.textContent.trim() === '1') {
-				// Tìm div cha lớn nhất (cấp cao nhất) chứa <p> này
 				const divToHide = p.closest('div.bg-item.rounded-xl');
 				if (divToHide) {
 					divToHide.style.display = 'none'; // Ẩn div
