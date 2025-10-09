@@ -45,7 +45,7 @@
         let moreSpeedsDiv = document.createElement("div");
         moreSpeedsDiv.id = "more-speeds";
 
-        let seeds = [0.25, 0.5, 0.75, 1, 1.1, 1.2, 1.25, 1.3, 1.5, 2];
+        let seeds = [0.25, 0.5, 0.75, 1, 1.2, 1.25, 1.3, 1.4, 1.5, 2];
         for (let i of seeds) {
             let btn = document.createElement("button");
             btn.style.color = color;
