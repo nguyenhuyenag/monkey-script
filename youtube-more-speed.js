@@ -23,7 +23,7 @@
     // Màu nút
     const bgNormal = "#2980b9";
     const bgActive = "#e67e22";
-    const speeds = [0.25, 0.5, 0.75, 1, 1.2, 1.25, 1.3, 1.4, 1.5, 2];
+    const speeds = [0.5, 1, 1.2, 1.25, 1.3, 1.35, 1.4, 1.5, 2];
 
     let activeBtn, defaultBtn;
 
