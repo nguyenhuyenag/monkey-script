@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         YouTube More Speeds
 // @namespace    https://github.com/nguyenhuyenag
-// @version      1.4.2
+// @version      1.0
 // @description  Adds buttons under a YouTube video with more playback speeds.
 // @author       nguyenhuyenag
 // @homepage     https://github.com/nguyenhuyenag/monkey-script
