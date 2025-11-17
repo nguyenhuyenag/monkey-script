@@ -21,8 +21,8 @@
     const textColor = "#FFF";
 
     // Màu nút
-    const bgNormal = "#2980b9";
-    const bgActive = "#e67e22";
+    const bgNormal = "#0d6efd";
+    const bgActive = "#198754"; // #dc3545
     const speeds = [0.5, 1, 1.2, 1.25, 1.3, 1.35, 1.4, 1.5, 2];
 
     let activeBtn, defaultBtn;
