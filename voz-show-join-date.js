@@ -38,7 +38,7 @@
             const joinTimestamp = cachedJoinDates[String(userId)];
             const joinDateObj = new Date(joinTimestamp * 1000);
             let formattedDate = joinDateObj.toLocaleDateString("vi-VN");
-            if (joinDateObj > WARNING_DATE) formattedDate += " *";
+            if (joinDateObj > WARNING_DATE) formattedDate += " ";
 
             const joinDateHtml = `<h5 class="message-userTitle joindate" dir="auto" itemprop="joindate">${formattedDate}</h5>`;
 
