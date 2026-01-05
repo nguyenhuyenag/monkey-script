@@ -76,33 +76,73 @@
         return btn;
     };
 
+    //// Thêm nút vào dưới tiêu đề video
+    // const addSpeeds = () => {
+    //     const info = document.querySelector(infoSel);
+    //     if (!info || document.getElementById("more-speeds")) return;
+
+    //     const wrap = document.createElement("div");
+    //     wrap.id = "more-speeds";
+    //     wrap.style.cssText = `
+    //         display: flex;
+    //         flex-wrap: wrap;
+    //         align-items: center;
+    //         gap: 2px;
+    //         margin-top: 8px;
+    //         padding: 8px 10px;
+    //         background: rgba(255, 255, 255, 0.06);
+    //         border: 1px solid rgba(255, 255, 255, 0.12);
+    //         border-radius: 10px;
+    //         box-shadow: 0 1px 5px rgba(0,0,0,0.2);
+    //         backdrop-filter: blur(4px);
+    //         font-family: "Roboto", "Arial", sans-serif;
+    //     `;
+
+    //     speeds.forEach(s => wrap.appendChild(createBtn(s)));
+    //     info.parentElement.insertBefore(wrap, info);
+
+    //     document.addEventListener("transitionend", e => {
+    //         if (e.target.id === "progress" && defaultBtn) defaultBtn.click();
+    //     });
+    //     window.addEventListener("popstate", () => defaultBtn?.click());
+    // };
+
+    //// Thêm nút vào goc trên bên phải video (trong khung phát video)
     const addSpeeds = () => {
-        const info = document.querySelector(infoSel);
-        if (!info || document.getElementById("more-speeds")) return;
+        const player = document.querySelector("#movie_player");
+        if (!player || document.getElementById("more-speeds")) return;
+
+        // đảm bảo player là relative
+        const style = getComputedStyle(player);
+        if (style.position === "static") {
+            player.style.position = "relative";
+        }
 
         const wrap = document.createElement("div");
         wrap.id = "more-speeds";
         wrap.style.cssText = `
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 2px;
-            margin-top: 8px;
-            padding: 8px 10px;
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 10px;
-            box-shadow: 0 1px 5px rgba(0,0,0,0.2);
-            backdrop-filter: blur(4px);
-            font-family: "Roboto", "Arial", sans-serif;
-        `;
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        z-index: 9999;
+
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2px;
+        padding: 6px 8px;
+
+        background: rgba(0, 0, 0, 0.55);
+        border: 1px solid rgba(255,255,255,0.18);
+        border-radius: 10px;
+        backdrop-filter: blur(6px);
+        box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    `;
 
         speeds.forEach(s => wrap.appendChild(createBtn(s)));
-        info.parentElement.insertBefore(wrap, info);
+        player.appendChild(wrap);
 
-        document.addEventListener("transitionend", e => {
-            if (e.target.id === "progress" && defaultBtn) defaultBtn.click();
-        });
+        // reset speed khi video load / đổi video
+        document.addEventListener("loadedmetadata", () => defaultBtn?.click(), true);
         window.addEventListener("popstate", () => defaultBtn?.click());
     };
 
