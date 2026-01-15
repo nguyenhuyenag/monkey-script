@@ -1,28 +1,23 @@
 // ==UserScript==
-// @name         YouTube More Speeds
+// @name         YouTube More Speeds (Top Outside Player)
 // @namespace    https://github.com/nguyenhuyenag
-// @version      1.0
-// @description  Adds buttons under a YouTube video with more playback speeds.
+// @version      1.1
+// @description  Adds playback speed buttons between search bar and video player (aligned with player).
 // @author       nguyenhuyenag
-// @homepage     https://github.com/nguyenhuyenag/monkey-script
-// @supportURL   https://github.com/nguyenhuyenag/monkey-script
-// @icon         https://www.youtube.com/s/desktop/3748dff5/img/favicon_48.png
 // @match        *://*.youtube.com/*
+// @icon         https://www.youtube.com/s/desktop/3748dff5/img/favicon_48.png
 // @license      MIT
 // ==/UserScript==
 
 (function () {
     "use strict";
 
-    if (window._ytSpeedExtDone) return;
-    window._ytSpeedExtDone = true;
+    if (window._ytMoreSpeedDone) return;
+    window._ytMoreSpeedDone = true;
 
-    const infoSel = "div#top-row.style-scope.ytd-watch-metadata";
     const textColor = "#FFF";
-
-    // Màu nút
     const bgNormal = "#0d6efd";
-    const bgActive = "#198754"; // #dc3545
+    const bgActive = "#198754";
     const speeds = [0.5, 1, 1.2, 1.25, 1.3, 1.35, 1.4, 1.5, 2];
 
     let activeBtn, defaultBtn;
@@ -30,6 +25,7 @@
     const createBtn = (rate) => {
         const btn = document.createElement("button");
         btn.textContent = `x${rate}`;
+
         btn.style.cssText = `
             display: flex;
             align-items: center;
@@ -42,7 +38,7 @@
             border-radius: 8px;
             width: 54px;
             height: 30px;
-            font-family: "Roboto", "Arial", sans-serif;
+            font-family: "Roboto","Arial",sans-serif;
             font-size: 13.5px;
             font-weight: 600;
             letter-spacing: 0.2px;
@@ -50,9 +46,11 @@
             box-shadow: 0 1px 3px rgba(0,0,0,0.25);
             user-select: none;
         `;
+
         btn.onmouseenter = () => {
-            if (btn !== activeBtn) btn.style.filter = "brightness(1.18)";
+            if (btn !== activeBtn) btn.style.filter = "brightness(1.15)";
         };
+
         btn.onmouseleave = () => {
             if (btn !== activeBtn) btn.style.filter = "brightness(1)";
         };
@@ -62,13 +60,11 @@
         btn.onclick = () => {
             if (activeBtn) {
                 activeBtn.style.background = bgNormal;
-                activeBtn.style.border = "1px solid rgba(255,255,255,0.2)";
                 activeBtn.style.filter = "brightness(1)";
             }
             btn.style.background = bgActive;
-            btn.style.border = "1px solid rgba(255,255,255,0.4)";
-            btn.style.filter = "brightness(1)";
             activeBtn = btn;
+
             const v = document.querySelector("video");
             if (v) v.playbackRate = rate;
         };
@@ -76,81 +72,50 @@
         return btn;
     };
 
-    //// Thêm nút vào dưới tiêu đề video
-    // const addSpeeds = () => {
-    //     const info = document.querySelector(infoSel);
-    //     if (!info || document.getElementById("more-speeds")) return;
-
-    //     const wrap = document.createElement("div");
-    //     wrap.id = "more-speeds";
-    //     wrap.style.cssText = `
-    //         display: flex;
-    //         flex-wrap: wrap;
-    //         align-items: center;
-    //         gap: 2px;
-    //         margin-top: 8px;
-    //         padding: 8px 10px;
-    //         background: rgba(255, 255, 255, 0.06);
-    //         border: 1px solid rgba(255, 255, 255, 0.12);
-    //         border-radius: 10px;
-    //         box-shadow: 0 1px 5px rgba(0,0,0,0.2);
-    //         backdrop-filter: blur(4px);
-    //         font-family: "Roboto", "Arial", sans-serif;
-    //     `;
-
-    //     speeds.forEach(s => wrap.appendChild(createBtn(s)));
-    //     info.parentElement.insertBefore(wrap, info);
-
-    //     document.addEventListener("transitionend", e => {
-    //         if (e.target.id === "progress" && defaultBtn) defaultBtn.click();
-    //     });
-    //     window.addEventListener("popstate", () => defaultBtn?.click());
-    // };
-
-    //// Thêm nút vào goc trên bên phải video (trong khung phát video)
     const addSpeeds = () => {
-        const player = document.querySelector("#movie_player");
-        if (!player || document.getElementById("more-speeds")) return;
-
-        // đảm bảo player là relative
-        const style = getComputedStyle(player);
-        if (style.position === "static") {
-            player.style.position = "relative";
-        }
+        const playerOuter = document.querySelector("#player-container-outer");
+        if (!playerOuter || document.getElementById("more-speeds")) return;
 
         const wrap = document.createElement("div");
         wrap.id = "more-speeds";
+
         wrap.style.cssText = `
-        position: absolute;
-        top: 12px;
-        right: 12px;
-        z-index: 9999;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
 
-        display: flex;
-        flex-wrap: wrap;
-        gap: 2px;
-        padding: 6px 8px;
+            margin: 8px 0 6px 0;
+            padding: 6px 8px;
 
-        background: rgba(0, 0, 0, 0.55);
-        border: 1px solid rgba(255,255,255,0.18);
-        border-radius: 10px;
-        backdrop-filter: blur(6px);
-        box-shadow: 0 2px 6px rgba(0,0,0,0.4);
-    `;
+            background: rgba(0,0,0,0.55);
+            border: 1px solid rgba(255,255,255,0.18);
+            border-radius: 10px;
+            backdrop-filter: blur(6px);
+
+            width: fit-content;
+            max-width: 100%;
+        `;
 
         speeds.forEach(s => wrap.appendChild(createBtn(s)));
-        player.appendChild(wrap);
 
-        // reset speed khi video load / đổi video
+        // Canh thẳng hàng tuyệt đối với player
+        const playerLeft = playerOuter.getBoundingClientRect().left;
+        const parentLeft = playerOuter.parentElement.getBoundingClientRect().left;
+        wrap.style.marginLeft = `${playerLeft - parentLeft}px`;
+
+        // Chèn TRƯỚC khung phát → tạo khoảng trống thật
+        playerOuter.parentNode.insertBefore(wrap, playerOuter);
+
         document.addEventListener("loadedmetadata", () => defaultBtn?.click(), true);
         window.addEventListener("popstate", () => defaultBtn?.click());
     };
 
     const waitFor = (sel, fn) => {
         const el = document.querySelector(sel);
-        el ? fn(el) : requestAnimationFrame(() => waitFor(sel, fn));
+        if (el) fn();
+        else requestAnimationFrame(() => waitFor(sel, fn));
     };
 
     window.addEventListener("yt-navigate-finish", addSpeeds);
-    if (document.body) waitFor(infoSel, addSpeeds);
+    if (document.body) waitFor("#player-container-outer", addSpeeds);
 })();
