@@ -19,5 +19,37 @@
     if (!url.searchParams.has('classic-editor')) {
         url.searchParams.append('classic-editor', '');
         window.location.replace(url.toString());
+        return;
     }
+
+    function clickClassicButton() {
+        const button = document.querySelector(
+            'button.blocks-in-post-classic-button'
+        );
+
+        if (button) {
+            console.log('Clicking "Continue to Classic Editor"...');
+            button.click();
+            return true;
+        }
+
+        return false;
+    }
+
+    // Thử ngay lập tức
+    if (clickClassicButton()) {
+        return;
+    }
+
+    // Theo dõi DOM nếu popup xuất hiện muộn
+    const observer = new MutationObserver(() => {
+        if (clickClassicButton()) {
+            observer.disconnect();
+        }
+    });
+
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true
+    });
 })();
